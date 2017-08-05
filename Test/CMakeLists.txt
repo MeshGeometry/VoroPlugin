@@ -27,7 +27,7 @@ define_source_files ()
 
 file(
     GLOB Plugin_SRC
-    "../Source/Mesh_Boolean.cpp"
+    "../Source/Mesh_PluginDemo.cpp"
 )
 
 
@@ -35,7 +35,6 @@ list(APPEND SOURCE_FILES ${Plugin_SRC})
 
 #pass console arg
 SET(URHO3D_WIN32_CONSOLE 1)
-add_definitions(-D__TBB_NO_IMPLICIT_LINKAGE)
 
 # Setup target with resource copying
 set(RESOURCE_DIRS "")
@@ -46,16 +45,12 @@ include_directories("./googletest/include" "./googletest")
 #define includes
 
 include_directories(../Source)
-include_directories(../InstantMeshes/src)
-include_directories(../InstantMeshes/ext/tbb/include)
 include_directories(${IOGRAM_SDK}/include/ThirdParty/Eigen)
 include_directories(${IOGRAM_SDK}/include/ThirdParty/Libigl/include)
 include_directories(${IOGRAM_SDK}/include/Core)
 include_directories(${IOGRAM_SDK}/include/Geometry)
 
 #link other libraries in
-target_link_libraries(${TARGET_NAME} tbb_static)
-target_link_libraries(${TARGET_NAME} InstantMeshes)
 target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/lib/Core_d.lib optimized ${IOGRAM_SDK}/lib/Core.lib )
 target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/lib/Geometry_d.lib  optimized ${IOGRAM_SDK}/lib/Geometry.lib )
 

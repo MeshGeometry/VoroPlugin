@@ -47,7 +47,6 @@ int nprocs = -1;
 GTEST_API_ int main(int argc, char **argv) {
 	printf("Running main() from gtest_main.cc\n");
 	testing::InitGoogleTest(&argc, argv);
-	::testing::GTEST_FLAG(filter) = "Basic.FromVariant";
 	RUN_ALL_TESTS();
 	std::cin.get();
 	return 0;

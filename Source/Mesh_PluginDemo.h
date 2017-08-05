@@ -5,10 +5,10 @@
 
 using namespace Urho3D;
 
-class URHO3D_API Mesh_FieldRemesh : public IoComponentBase {
-	URHO3D_OBJECT(Mesh_FieldRemesh, IoComponentBase)
+class URHO3D_API Mesh_PluginDemo : public IoComponentBase {
+	URHO3D_OBJECT(Mesh_PluginDemo, IoComponentBase)
 public:
-	Mesh_FieldRemesh(Urho3D::Context* context);
+	Mesh_PluginDemo(Urho3D::Context* context);
 
 	void SolveInstance(
 		const Urho3D::Vector<Urho3D::Variant>& inSolveInstance,
