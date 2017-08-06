@@ -45,15 +45,14 @@ include_directories("./googletest/include" "./googletest")
 #define includes
 
 include_directories(../Source)
-include_directories(${IOGRAM_SDK}/include/ThirdParty/Eigen)
-include_directories(${IOGRAM_SDK}/include/ThirdParty/Libigl/include)
-include_directories(${IOGRAM_SDK}/include/Core)
-include_directories(${IOGRAM_SDK}/include/Geometry)
+include_directories(${IOGRAM_SDK}/Core)
+include_directories(${IOGRAM_SDK}/Geometry)
+include_directories(${IOGRAM_SDK}/ThirdParty/Eigen)
+include_directories(${IOGRAM_SDK}/ThirdParty/Libigl/include)
 
 #link other libraries in
-target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/lib/Core_d.lib optimized ${IOGRAM_SDK}/lib/Core.lib )
-target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/lib/Geometry_d.lib  optimized ${IOGRAM_SDK}/lib/Geometry.lib )
-
+target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/Build/Win64/lib/Core_d.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
+target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/Build/Win64/lib/Geometry_d.lib  optimized ${IOGRAM_SDK}/Build/Win64/lib/Geometry.lib )
 
 if (MSVC)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
