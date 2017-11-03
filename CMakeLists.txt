@@ -4,4 +4,5 @@ project (IoPluginDemo)
 
 add_subdirectory("./Test")
 add_subdirectory("./Source")
+add_subdirectory("./Voro++")
 
