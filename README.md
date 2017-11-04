@@ -1,2 +1,3 @@
-# IoPluginDemo
-Base project for making your own IOGRAM plugins.
+# VoroPlugin
+Voro++ plugin for IOGRAM. 
+Base for trabecular bone research. 
