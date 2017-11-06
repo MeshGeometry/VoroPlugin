@@ -27,7 +27,7 @@ define_source_files ()
 
 file(
     GLOB Plugin_SRC
-    "../Source/Mesh_PluginDemo.cpp"
+    "../Source/Mesh_VoroPlugin.cpp"
 )
 
 

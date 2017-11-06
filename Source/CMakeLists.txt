@@ -6,7 +6,7 @@ include (Urho3D-CMake-common)
 
 set(CMAKE_DEBUG_POSTFIX "_d")
 
-set (TARGET_NAME IoPluginDemo)
+set (TARGET_NAME VoroPlugin)
 
 # Find Urho3D library
 find_package (Urho3D REQUIRED)

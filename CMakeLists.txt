@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.8.6)
 
-project (IoPluginDemo)
+project (VoroPlugin)
 
 add_subdirectory("./Test")
 add_subdirectory("./Source")
