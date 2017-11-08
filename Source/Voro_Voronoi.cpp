@@ -1,5 +1,6 @@
 #include "Voro_Voronoi.h"
 #include "container.hh"
+#include "VoroToIogram.h"
 
 namespace {
 	double rnd() { return double(rand()) / RAND_MAX; }
@@ -76,8 +77,12 @@ void Voro_Voronoi::SolveInstance(
 	}
 
 	//now output some meshes
-	con.draw_cells_gnuplot("random_points_v.gnu");
-	con.draw_cells_pov("random_points.pov");
+	VariantVector cell_meshes = GetMeshesFromContainer(con);
 
-	outSolveInstance = inSolveInstance;
+	//con.draw_cells_gnuplot("random_points_v.gnu");
+	//con.draw_cells_pov("random_points.pov");
+
+	Variant out_var(cell_meshes);
+
+	outSolveInstance[0] = out_var;
 }

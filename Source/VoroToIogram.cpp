@@ -45,3 +45,25 @@ Variant GetMeshFromVoronoiCell(voro::voronoicell c)
 
 	return TriMesh_Make(vertices, faces);
 }
+
+
+
+template<class c_loop>
+VariantVector draw_cells_iogram(c_loop &vl, voro::container con) {
+	VariantVector ret;
+	voro::voronoicell c; double *pp;
+	if (vl.start()) do if (con.compute_cell(c, vl)) {
+		//pp = p[vl.ijk] + ps*vl.q;
+		//c.draw_gnuplot(*pp, pp[1], pp[2], fp);
+		Variant M = GetMeshFromVoronoiCell(c);
+		ret.Push(M);
+	} while (vl.inc());
+	return ret;
+}
+
+Urho3D::VariantVector GetMeshesFromContainer(voro::container con)
+{
+	voro::c_loop_all vl(con);
+	VariantVector ret = draw_cells_iogram(vl, con);
+	return ret;
+}

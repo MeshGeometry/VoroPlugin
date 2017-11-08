@@ -27,7 +27,8 @@ define_source_files ()
 
 file(
     GLOB Plugin_SRC
-    "../Source/Mesh_VoroPlugin.cpp"
+    "../Source/Voro_Voronoi.cpp"
+    "../Source/VoroToIogram.cpp"
 )
 
 
@@ -49,10 +50,13 @@ include_directories(${IOGRAM_SDK}/Core)
 include_directories(${IOGRAM_SDK}/Geometry)
 include_directories(${IOGRAM_SDK}/ThirdParty/Eigen)
 include_directories(${IOGRAM_SDK}/ThirdParty/Libigl/include)
+include_directories(../Voro++)
 
 #link other libraries in
 target_link_libraries(${TARGET_NAME} debug C:/git-repos/IogramEditor/Build/Win64/Source/Core/Debug/Core_d.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
 target_link_libraries(${TARGET_NAME} debug C:/git-repos/IogramEditor/Build/Win64/Source/Geometry/Debug/Geometry_d.lib  optimized ${IOGRAM_SDK}/Build/Win64/lib/Geometry.lib )
+target_link_libraries(${TARGET_NAME} debug C:/git-repos/VoroPlugin/Build/Win64/Voro++/Debug/voro-cpp.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
+
 
 if (MSVC)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
