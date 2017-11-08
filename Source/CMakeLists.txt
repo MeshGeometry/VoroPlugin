@@ -23,7 +23,7 @@ set(RESOURCE_DIRS "")
 
 setup_library(SHARED)
 
-target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/Build/Win64/lib/Core_d.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
-target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/Build/Win64/lib/Geometry_d.lib  optimized ${IOGRAM_SDK}/Build/Win64/lib/Geometry.lib )
-target_link_libraries(${TARGET_NAME} Voro++)
+target_link_libraries(${TARGET_NAME} debug C:/git-repos/IogramEditor/Build/Win64/Source/Core/Debug/Core_d.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
+target_link_libraries(${TARGET_NAME} debug C:/git-repos/IogramEditor/Build/Win64/Source/Geometry/Debug/Geometry_d.lib  optimized ${IOGRAM_SDK}/Build/Win64/lib/Geometry.lib )
+target_link_libraries(${TARGET_NAME} debug C:/git-repos/VoroPlugin/Build/Win64/Voro++/Debug/voro-cpp.lib optimized ${IOGRAM_SDK}/Build/Win64/lib/Core.lib )
 

@@ -5,10 +5,10 @@
 
 using namespace Urho3D;
 
-class URHO3D_API Mesh_PluginDemo : public IoComponentBase {
-	URHO3D_OBJECT(Mesh_PluginDemo, IoComponentBase)
+class URHO3D_API Voro_Voronoi : public IoComponentBase {
+	URHO3D_OBJECT(Voro_Voronoi, IoComponentBase)
 public:
-	Mesh_PluginDemo(Urho3D::Context* context);
+	Voro_Voronoi(Urho3D::Context* context);
 
 	void SolveInstance(
 		const Urho3D::Vector<Urho3D::Variant>& inSolveInstance,
