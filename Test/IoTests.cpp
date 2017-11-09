@@ -12,6 +12,7 @@
 
 #include "VoroToIogram.h"
 #include "voro++.hh"
+#include "Voro_Voronoi.h"
 
 #include "IoGraph.h"
 
@@ -46,6 +47,9 @@ TEST(Basic, FirstTest)
 
 TEST(Basic, CellsToMeshes)
 {
+
+	if (!initialized)
+		Initialize();
 	//for now just hard code a 2X2X2 box
 	// Set up constants for the container geometry
 	const double x_min = -1, x_max = 1;
@@ -79,6 +83,21 @@ TEST(Basic, CellsToMeshes)
 
 	//now output some meshes
 	VariantVector cell_meshes = GetMeshesFromContainer(con);
+	int stuff = 0;
+
+}
+
+TEST(Basic, VoroComponent)
+{
+	if (!initialized)
+		Initialize();
+
+	IoGraph* g = new IoGraph(context_);
+
+	SharedPtr<IoComponentBase> v(new Voro_Voronoi(context_));
+
+	g->AddNewComponent(v);
+	g->TopoSolveGraph();
 	int stuff = 0;
 }
 
