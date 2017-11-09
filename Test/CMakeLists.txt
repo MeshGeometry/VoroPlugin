@@ -14,6 +14,8 @@ if (COMMAND cmake_policy)
     endif ()
 endif ()
 
+
+
 # Set CMake modules search path
 set (CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake/Modules)
 # Include Urho3D Cmake common module
@@ -21,6 +23,7 @@ include (Urho3D-CMake-common)
 
 # Define target name
 set (TARGET_NAME IoTest)
+
 
 # Define source files
 define_source_files ()
@@ -40,6 +43,7 @@ SET(URHO3D_WIN32_CONSOLE 1)
 # Setup target with resource copying
 set(RESOURCE_DIRS "")
 setup_main_executable ()
+set_target_properties(IoTest PROPERTIES LINKER_LANGUAGE CXX)
 
 #link the libs
 include_directories("./googletest/include" "./googletest")
