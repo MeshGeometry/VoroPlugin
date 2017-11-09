@@ -1,6 +1,7 @@
 #include "VoroToIogram.h"
 #include "TriMesh.h"
 #include "Polyline.h"
+#include <iostream>
 
 using Urho3D::Variant;
 using Urho3D::VariantMap;
@@ -9,7 +10,7 @@ using Urho3D::VariantVector;
 using Urho3D::Vector3;
 using Urho3D::Vector;
 
-Variant GetMeshFromVoronoiCell(voro::voronoicell c) 
+Variant GetMeshFromVoronoiCell(voro::voronoicell &c) 
 {
 	int i, j, k, l, m, n;
 	double *ptsp = c.pts;
@@ -42,26 +43,30 @@ Variant GetMeshFromVoronoiCell(voro::voronoicell c)
 			}
 		}
 	}
-
 	return TriMesh_Make(vertices, faces);
 }
 
 
-
-template<class c_loop>
-VariantVector draw_cells_iogram(c_loop &vl, voro::container con) {
+VariantVector draw_cells_iogram(voro::c_loop_all &vl, voro::container con) {
 	VariantVector ret;
 	voro::voronoicell c; double *pp;
-	if (vl.start()) do if (con.compute_cell(c, vl)) {
-		//pp = p[vl.ijk] + ps*vl.q;
-		//c.draw_gnuplot(*pp, pp[1], pp[2], fp);
-		Variant M = GetMeshFromVoronoiCell(c);
-		ret.Push(M);
-	} while (vl.inc());
+	int counter = 0;
+	if (vl.start()) {
+		do {
+ 			if (con.compute_cell(c, vl)) {
+
+				Variant M = GetMeshFromVoronoiCell(c);
+				ret.Push(M);
+				std::cout << "Pushing mesh " << counter << std::endl;
+				++counter;
+				
+			}
+		} while (vl.inc());
+	}
 	return ret;
 }
 
-Urho3D::VariantVector GetMeshesFromContainer(voro::container con)
+Urho3D::VariantVector GetMeshesFromContainer(voro::container &con)
 {
 	voro::c_loop_all vl(con);
 	VariantVector ret = draw_cells_iogram(vl, con);

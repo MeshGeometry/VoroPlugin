@@ -58,7 +58,7 @@ TEST(Basic, CellsToMeshes)
 
 	int i;
 	double x, y, z;
-	int particles = 20;
+	int particles = 10;
 
 	//Create a container with the geometry given above, and make it
 	//non-periodic in each of the three coordinates. Allocate space for
@@ -79,6 +79,7 @@ TEST(Basic, CellsToMeshes)
 
 	//now output some meshes
 	VariantVector cell_meshes = GetMeshesFromContainer(con);
+	int stuff = 0;
 }
 
 
