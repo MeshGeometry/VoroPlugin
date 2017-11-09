@@ -78,7 +78,7 @@ TEST(Basic, CellsToMeshes)
 	}
 
 	//now output some meshes
-	//VariantVector cell_meshes = GetMeshesFromContainer(con);
+	VariantVector cell_meshes = GetMeshesFromContainer(con);
 }
 
 
