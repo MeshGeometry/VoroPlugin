@@ -23,7 +23,16 @@ set(RESOURCE_DIRS "")
 
 setup_library(SHARED)
 
+
+# Setup target with resource copying
+if (APPLE)
+target_link_libraries(${TARGET_NAME} debug /Users/Mesh/Dev/IogramEditor/build/Source/Core/Debug/libCore_d.a optimized ${IOGRAM_SDK}/../Build/Win64/Source/Core/Release/Core.lib )
+target_link_libraries(${TARGET_NAME} debug /Users/Mesh/Dev/IogramEditor/build/Source/Geometry/Debug/libGeometry_d.a  optimized ${IOGRAM_SDK}/../Build/Win64/Source/Geometry/Release/Geometry.lib )
+target_link_libraries(${TARGET_NAME} debug ${CMAKE_SOURCE_DIR}/Build/gcc_build/Voro++/Debug/libvoro-cpp.a optimized ${CMAKE_SOURCE_DIR}/Build/Win64/Voro++/Release/voro-cpp.lib )
+
+  else()
 target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/../Build/Win64/Source/Core/Debug/Core_d.lib optimized ${IOGRAM_SDK}/../Build/Win64/Source/Core/Release/Core.lib )
 target_link_libraries(${TARGET_NAME} debug ${IOGRAM_SDK}/../Build/Win64/Source/Geometry/Debug/Geometry_d.lib  optimized ${IOGRAM_SDK}/../Build/Win64/Source/Geometry/Release/Geometry.lib )
 target_link_libraries(${TARGET_NAME} debug ${CMAKE_SOURCE_DIR}/Build/Win64/Voro++/Debug/voro-cpp.lib optimized ${CMAKE_SOURCE_DIR}/Build/Win64/Voro++/Release/voro-cpp.lib )
 
+endif()
