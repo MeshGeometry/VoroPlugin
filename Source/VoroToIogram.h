@@ -4,7 +4,7 @@
 
 // conversion from voro++ voronoi cells to trimesh output
 
-Urho3D::Variant GetMeshFromVoronoiCell(voro::voronoicell &c);
+Urho3D::Variant GetMeshFromVoronoiCell(voro::voronoicell &c, double x, double y, double z);
 
 Urho3D::VariantVector GetMeshesFromContainer(voro::container &con);
 

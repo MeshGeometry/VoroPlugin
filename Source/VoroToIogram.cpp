@@ -10,7 +10,7 @@ using Urho3D::VariantVector;
 using Urho3D::Vector3;
 using Urho3D::Vector;
 
-Variant GetMeshFromVoronoiCell(voro::voronoicell &c) 
+Variant GetMeshFromVoronoiCell(voro::voronoicell &c, double x, double y, double z)
 {
 	int i, j, k, l, m, n;
 	double *ptsp = c.pts;
@@ -21,7 +21,8 @@ Variant GetMeshFromVoronoiCell(voro::voronoicell &c)
 
 	//verts
 	for (i = 0; i < c.p; i++, ptsp += 3) {
-		Vector3 v(*ptsp, ptsp[1], ptsp[2]);
+		//Vector3 v(*ptsp, ptsp[1], ptsp[2]);
+		Vector3 v(x+*ptsp*0.5, y+ptsp[1]*0.5, z+ptsp[2]*0.5);
 		vertices.Push(Variant(v));
 	}
 
@@ -51,11 +52,14 @@ VariantVector draw_cells_iogram(voro::c_loop_all &vl, voro::container &con) {
 	VariantVector ret;
 	voro::voronoicell c; double *pp;
 	int counter = 0;
+	int pid, ps = con.ps; double x, y, z, r;
 	if (vl.start()) {
 		do {
  			if (con.compute_cell(c, vl)) {
 
-				Variant M = GetMeshFromVoronoiCell(c);
+				vl.pos(pid, x, y, z, r);
+
+				Variant M = GetMeshFromVoronoiCell(c, x, y, z);
 				ret.Push(M);
 				std::cout << "Pushing mesh " << counter << std::endl;
 				++counter;
