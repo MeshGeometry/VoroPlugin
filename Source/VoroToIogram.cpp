@@ -47,7 +47,7 @@ Variant GetMeshFromVoronoiCell(voro::voronoicell &c)
 }
 
 
-VariantVector draw_cells_iogram(voro::c_loop_all &vl, voro::container con) {
+VariantVector draw_cells_iogram(voro::c_loop_all &vl, voro::container &con) {
 	VariantVector ret;
 	voro::voronoicell c; double *pp;
 	int counter = 0;

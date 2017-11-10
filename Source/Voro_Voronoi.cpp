@@ -35,7 +35,7 @@ Voro_Voronoi::Voro_Voronoi(Context* context) :IoComponentBase(context, 0, 0)
 		"R",
 		"Mesh Out",
 		VAR_VARIANTMAP,
-		DataAccess::ITEM
+		DataAccess::LIST
 		);
 
 }
@@ -85,4 +85,7 @@ void Voro_Voronoi::SolveInstance(
 	Variant out_var(cell_meshes);
 
 	outSolveInstance[0] = out_var;
+	int test = 0;
+
+	
 }
