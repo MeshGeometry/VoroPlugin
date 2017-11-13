@@ -5,9 +5,7 @@
 
 
 // conversion from voro++ voronoi cells to trimesh output
-#define EXPORT __attribute__((visibility("default")))
 
-EXPORT
 Urho3D::Variant GetMeshFromVoronoiCell(voro::voronoicell &c, double x, double y, double z);
 
 Urho3D::VariantVector GetMeshesFromContainer(voro::container &con);
