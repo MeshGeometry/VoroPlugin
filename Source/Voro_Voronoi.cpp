@@ -23,9 +23,9 @@ Voro_Voronoi::Voro_Voronoi(Context* context) :IoComponentBase(context, 0, 0)
 	//	);
 
 	AddInputSlot(
-		"Number of random Points",
+		"Number",
 		"N",
-		"Points",
+		"Number of random Points",
 		VAR_INT,
 		DataAccess::ITEM
 	);
