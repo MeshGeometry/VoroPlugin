@@ -14,7 +14,7 @@ include_directories (${URHO3D_INCLUDE_DIRS})
 include_directories(${IOGRAM_SDK}/Core)
 include_directories(${IOGRAM_SDK}/Geometry)
 include_directories(${IOGRAM_SDK}/ThirdParty/Eigen)
-include_directories(${IOGRAM_SDK}/ThirdParty/Libigl/include)
+include_directories(${IOGRAM_SDK}/ThirdParty/Libigl/igl)
 include_directories(../Voro++)
 
 define_source_files()

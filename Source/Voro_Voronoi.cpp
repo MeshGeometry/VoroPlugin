@@ -14,13 +14,21 @@ Voro_Voronoi::Voro_Voronoi(Context* context) :IoComponentBase(context, 0, 0)
 	SetFullName("Voronoi From Points");
 	SetDescription("Voronoi diagram from points and a container");
 
+	//AddInputSlot(
+	//	"Points",
+	//	"P",
+	//	"Points",
+	//	VAR_VECTOR3,
+	//	DataAccess::LIST
+	//	);
+
 	AddInputSlot(
+		"Number of random Points",
+		"N",
 		"Points",
-		"P",
-		"Points",
-		VAR_VECTOR3,
-		DataAccess::LIST
-		);
+		VAR_INT,
+		DataAccess::ITEM
+	);
 
 	AddInputSlot(
 		"Box",
@@ -45,6 +53,18 @@ void Voro_Voronoi::SolveInstance(
 	Urho3D::Vector<Urho3D::Variant>& outSolveInstance
 	)
 {
+	////////////////////////////////////////////////////////////
+	// Verify input slot 0
+	VariantType type0 = inSolveInstance[0].GetType();
+	if (!(type0 == VariantType::VAR_FLOAT || type0 == VariantType::VAR_INT)) {
+		URHO3D_LOGWARNING("Min must be a valid float or integer.");
+		outSolveInstance[0] = Variant();
+		return;
+	}
+	int p = inSolveInstance[0].GetInt();
+
+
+
 	//for now just hard code a 2X2X2 box
 	// Set up constants for the container geometry
 	const double x_min = -1, x_max = 1;
@@ -57,7 +77,7 @@ void Voro_Voronoi::SolveInstance(
 
 	int i;
 	double x, y, z;
-	int particles = 20;
+	int particles = p;
 	
 	 //Create a container with the geometry given above, and make it
 	 //non-periodic in each of the three coordinates. Allocate space for
