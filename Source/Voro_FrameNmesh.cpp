@@ -2,15 +2,16 @@
 #include "NMesh.h"
 #include "TriMesh.h"
 #include <iostream>
+#include "Geomlib_RemoveDuplicates.h"
 
 
 String Voro_FrameNmesh::iconTexture = "";
 
 Voro_FrameNmesh::Voro_FrameNmesh(Context* context) :IoComponentBase(context, 0, 0)
 {
-    SetName("OffsetToCentroid");
-    SetFullName("Offsets a mesh toward the centroid");
-    SetDescription("Offsets a mesh toward the centroid");
+    SetName("FrameNMesh");
+    SetFullName("Frames an N mesh toward the centroid");
+    SetDescription("Frames an N mesh toward the centroid");
     
     
     AddInputSlot(
@@ -37,6 +38,13 @@ Voro_FrameNmesh::Voro_FrameNmesh(Context* context) :IoComponentBase(context, 0, 
                   VAR_VARIANTMAP,
                   DataAccess::ITEM
                   );
+//    AddOutputSlot(
+//                  "JoinedMeshOut",
+//                  "J",
+//                  "Mesh Out",
+//                  VAR_VARIANTMAP,
+//                  DataAccess::ITEM
+//                  );
     
 }
 
@@ -115,10 +123,22 @@ void Voro_FrameNmesh::SolveInstance(
         
       
     }
+
     
     Variant out_mesh = TriMesh_Make(frame_verts, frame_faces);
     
     outSolveInstance[0] = out_mesh;
+    
+//    Vector<Vector3> vert_vecs;
+//    for (int i = 0; i < frame_verts.Size(); ++i)
+//        vert_vecs.Push(frame_verts[i].GetVector3());
+//    Variant face_var = Variant(frame_faces);
+//    Variant new_verts;
+//
+//    Geomlib::RemoveDuplicates(vert_vecs, new_verts, face_var);
+//    Variant out_joined_mesh = TriMesh_Make(new_verts, face_var);
+//
+//    outSolveInstance[1] = out_joined_mesh;
     
     
 }
