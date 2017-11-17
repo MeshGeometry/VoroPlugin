@@ -73,10 +73,11 @@ Variant GetNMeshFromVoronoiCell(voro::voronoicell &c, double x, double y, double
             l = c.cycle_up(c.ed[i][c.nu[i] + j], k);
             m = c.ed[k][l]; c.ed[k][l] = -1 - m;
             face_verts.push_back(i);
+            face_verts.push_back(k);
             while (m != i) {
                 n = c.cycle_up(c.ed[k][c.nu[k] + l], m);
                 //fprintf(fp, ",<%d,%d,%d>\n", i, k, m);
-                face_verts.push_back(k);
+                
                 face_verts.push_back(m);
                 k = m; l = n;
                 m = c.ed[k][l]; c.ed[k][l] = -1 - m;
