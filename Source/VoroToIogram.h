@@ -14,5 +14,9 @@ Urho3D::VariantVector GetMeshesFromContainer(voro::container &con);
 
 Urho3D::VariantVector draw_cells_iogram(voro::c_loop_all &vl, voro::container &con);
 
+Urho3D::VariantVector GetNMeshesFromContainer(voro::container &con);
+
+Urho3D::VariantVector draw_n_cells_iogram(voro::c_loop_all &vl, voro::container &con);
+
 
 

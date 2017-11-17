@@ -45,6 +45,14 @@ Voro_Voronoi::Voro_Voronoi(Context* context) :IoComponentBase(context, 0, 0)
 		VAR_VARIANTMAP,
 		DataAccess::LIST
 		);
+    
+    AddOutputSlot(
+                  "NMeshOut",
+                  "N",
+                  "NMesh Out",
+                  VAR_VARIANTMAP,
+                  DataAccess::LIST
+                  );
 
 }
 
@@ -98,14 +106,15 @@ void Voro_Voronoi::SolveInstance(
 
 	//now output some meshes
 	VariantVector cell_meshes = GetMeshesFromContainer(con);
+    VariantVector n_cell_meshes = GetNMeshesFromContainer(con);
 
 	//con.draw_cells_gnuplot("random_points_v.gnu");
 	//con.draw_cells_pov("random_points.pov");
 
 	Variant out_var(cell_meshes);
+    Variant out_n_var(n_cell_meshes);
 
 	outSolveInstance[0] = out_var;
-	int test = 0;
-
+	outSolveInstance[1] = out_n_var;
 	
 }

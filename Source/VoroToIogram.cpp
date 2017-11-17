@@ -123,3 +123,32 @@ Urho3D::VariantVector GetMeshesFromContainer(voro::container &con)
 	VariantVector ret = draw_cells_iogram(vl, con);
 	return ret;
 }
+
+VariantVector draw_n_cells_iogram(voro::c_loop_all &vl, voro::container &con) {
+    VariantVector ret;
+    voro::voronoicell c;
+    int counter = 0;
+    int pid, ps = con.ps; double x, y, z, r;
+    if (vl.start()) {
+        do {
+            if (con.compute_cell(c, vl)) {
+                
+                vl.pos(pid, x, y, z, r);
+                
+                Variant M = GetNMeshFromVoronoiCell(c, x, y, z);
+                ret.Push(M);
+                std::cout << "Pushing mesh " << counter << std::endl;
+                ++counter;
+                
+            }
+        } while (vl.inc());
+    }
+    return ret;
+}
+
+Urho3D::VariantVector GetNMeshesFromContainer(voro::container &con)
+{
+    voro::c_loop_all vl(con);
+    VariantVector ret = draw_n_cells_iogram(vl, con);
+    return ret;
+}
