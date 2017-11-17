@@ -71,48 +71,49 @@ void Voro_FrameNmesh::SolveInstance(
     VariantVector frame_faces;
     
     for (int i = 0; i < faces.Size(); ++i){
-        int num_verts_in_cur_face = faces[i].GetInt();
-        std::cout << "Numb verts in this face: " << num_verts_in_cur_face << std::endl;
+        
+        VariantMap face = faces[i].GetVariantMap();
+        VariantVector face_ids = face["face_vertices"].GetVariantVector();
+        
+        int N = face_ids.Size();
+        
+        std::cout << "Numb verts in this face: " << N << std::endl;
         
         // find the centroid
         Vector3 cen = Vector3::ZERO;
-        for (int j = 0; j < num_verts_in_cur_face; ++j){
-            int i0 = i + j + 1;
-            int vert_id = faces[i0].GetInt();
+        for (int j = 0; j < N; ++j){
+            int vert_id = face_ids[j].GetInt();
             cen += verts[vert_id].GetVector3();
         }
-        cen = cen*(1.0f/(float)num_verts_in_cur_face);
-        
+        cen = cen*(1.0f/(float)N);
+
         // create new vertices
-        for (int j = 0; j < num_verts_in_cur_face; ++j){
-            int i0 = i + j + 1;
-            int vert_id = faces[i0].GetInt();
+        for (int j = 0; j < N; ++j){
+            int vert_id = face_ids[j].GetInt();
             Vector3 oldVert = verts[vert_id].GetVector3();
             Vector3 newVert = oldVert + dist*(cen - oldVert);
             frame_verts.Push(Variant(newVert));
         }
-            
+
         // create new faces
-        for (int j = 0; j < num_verts_in_cur_face; ++j){
-            int i0 = i + j + 1;
-            int next = i + (j%num_verts_in_cur_face) + 1;
-            int A_0 = faces[i0].GetInt();
-            int A_1 = faces[next].GetInt();
-            int B_0 = faces.Size() - (num_verts_in_cur_face - j);
-            int B_1 = faces.Size() - (num_verts_in_cur_face - (j+1)%num_verts_in_cur_face);
-            
+        for (int j = 0; j < N; ++j){
+            int A_0 = face_ids[j].GetInt();
+            int A_1 = face_ids[(j+1)%N].GetInt();
+            int B_0 = frame_verts.Size() - (N - j);
+            int B_1 = frame_verts.Size() - (N - (j+1)%N);
+
             frame_faces.Push(Variant(A_0));
             frame_faces.Push(Variant(A_1));
             frame_faces.Push(Variant(B_0));
-            
+
             frame_faces.Push(Variant(A_1));
             frame_faces.Push(Variant(B_1));
             frame_faces.Push(Variant(B_0));
-            
-            
+
+
         }
         
-        i += num_verts_in_cur_face;
+      
     }
     
     Variant out_mesh = TriMesh_Make(frame_verts, frame_faces);
