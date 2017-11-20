@@ -160,34 +160,13 @@ void Voro_CubicLattices::SolveInstance(
 		VariantVector arrayList;
 		VariantVector arrayList_transformed, bodyList_transformed, faceList_transformed;
 
-
-		// Set up base list in x-direction
-		VariantVector base_list;
-		for (int i = 0; i < x_numb + 1; ++i)
-		{
-			base_list.Push(Variant(origin + i*x_basis));
-		}
-
-		// Add rows in z-direction
-		for (int i = 0; i < x_numb + 1; ++i)
-		{
-			VariantVector currList;
-			for (int j = 0; j < base_list.Size(); ++j)
-			{
-				currList.Push(Variant(base_list[j].GetVector3() + i*z_basis));
+		// Set up basic array
+		for (int i = 0; i < x_numb+1; ++i) {
+			for (int j = 0; j < x_numb+1; ++j) {
+				for (int k = 0; k < x_numb+1; ++k) {
+					arrayList.Push(Variant(origin + i*x_basis + j*y_basis + k*z_basis));
+				}
 			}
-			gridList.Push(currList);
-		}
-
-		// Add grids in y-direction
-		for (int i = 0; i < x_numb + 1; ++i)
-		{
-			VariantVector currGrid;
-			for (int j = 0; j < gridList.Size(); ++j)
-			{
-				currGrid.Push(Variant(gridList[j].GetVector3() + i*y_basis));
-			}
-			arrayList.Push(currGrid);
 		}
 
 		// for body centered, add point in center of each cell. 
