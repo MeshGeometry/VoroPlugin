@@ -5,6 +5,7 @@
 #include "Voro_PullToCentroid.h"
 #include "Voro_VoronoiFromPoints.h"
 #include "Voro_FrameNmesh.h"
+#include "Voro_CubicLattices.h"
 
 using namespace Urho3D;
 
@@ -17,6 +18,7 @@ extern "C"
 		RegisterIogramType<Voro_PullToCentroid>(context);
 		RegisterIogramType<Voro_VoronoiFromPoints>(context);
         RegisterIogramType<Voro_FrameNmesh>(context);
+		RegisterIogramType<Voro_CubicLattices>(context);
 	}
 
 }

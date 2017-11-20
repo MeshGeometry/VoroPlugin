@@ -47,6 +47,14 @@ Voro_VoronoiFromPoints::Voro_VoronoiFromPoints(Context* context) :IoComponentBas
 		DataAccess::LIST
 	);
 
+	AddOutputSlot(
+		"NMeshOut",
+		"N",
+		"NMesh Out",
+		VAR_VARIANTMAP,
+		DataAccess::LIST
+	);
+
 }
 
 void Voro_VoronoiFromPoints::SolveInstance(
@@ -69,7 +77,7 @@ void Voro_VoronoiFromPoints::SolveInstance(
 
 	float dim = inSolveInstance[1].GetFloat();
 
-	//for now just hard code a 2X2X2 box
+
 	// Set up constants for the container geometry
 	const double x_min = 0, x_max = dim;
 	const double y_min = 0, y_max = dim;
@@ -91,7 +99,7 @@ void Voro_VoronoiFromPoints::SolveInstance(
 
 
 	// Add the points into the container
-	// what happens if they are outside???!!!
+	// Any outside will be ignored
 	for (i = 0; i < L.Size(); i++) {
 		Vector3 p = L[i].GetVector3();
 		con.put(i, p.x_, p.y_, p.z_);
@@ -99,14 +107,13 @@ void Voro_VoronoiFromPoints::SolveInstance(
 
 	//now output some meshes
 	VariantVector cell_meshes = GetMeshesFromContainer(con);
-
-	//con.draw_cells_gnuplot("random_points_v.gnu");
-	//con.draw_cells_pov("random_points.pov");
+	VariantVector n_cell_meshes = GetNMeshesFromContainer(con);
 
 	Variant out_var(cell_meshes);
+	Variant out_n_var(n_cell_meshes);
 
 	outSolveInstance[0] = out_var;
-	int test = 0;
+	outSolveInstance[1] = out_n_var;
 
 
 }
