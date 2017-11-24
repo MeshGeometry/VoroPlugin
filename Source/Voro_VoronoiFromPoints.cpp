@@ -1,6 +1,9 @@
 #include "Voro_VoronoiFromPoints.h"
 #include "container.hh"
 #include "VoroToIogram.h"
+#include "Geomlib_JoinMeshes.h"
+#include "Geomlib_RemoveDuplicates.h"
+#include "TriMesh.h"
 
 namespace {
 	double rnd() { return double(rand()) / RAND_MAX; }

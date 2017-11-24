@@ -31,11 +31,12 @@ Voro_Voronoi::Voro_Voronoi(Context* context) :IoComponentBase(context, 0, 0)
 	);
 
 	AddInputSlot(
-		"Box",
-		"M",
-		"Mesh",
-		VAR_VARIANTMAP,
-		DataAccess::ITEM
+		"BoxDim",
+		"D",
+		"Dimension of Box",
+		VAR_FLOAT,
+		DataAccess::ITEM,
+		2.0f
 	);
 
 	AddOutputSlot(
@@ -70,14 +71,14 @@ void Voro_Voronoi::SolveInstance(
 		return;
 	}
 	int p = inSolveInstance[0].GetInt();
-
+	float dim = inSolveInstance[1].GetFloat();
 
 
 	//for now just hard code a 2X2X2 box
 	// Set up constants for the container geometry
-	const double x_min = -1, x_max = 1;
-	const double y_min = -1, y_max = 1;
-	const double z_min = -1, z_max = 1;
+	const double x_min = 0, x_max = dim;
+	const double y_min = 0, y_max = dim;
+	const double z_min = 0, z_max = dim;
 	const double cvol = (x_max - x_min)*(y_max - y_min)*(x_max - x_min);
 	
 	// Set up the number of blocks that the container is divided into
