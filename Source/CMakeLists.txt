@@ -8,6 +8,10 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 
 set (TARGET_NAME VoroPlugin)
 
+if (APPLE)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default")
+endif()
+
 # Find Urho3D library
 find_package (Urho3D REQUIRED)
 include_directories (${URHO3D_INCLUDE_DIRS})
